@@ -1,11 +1,18 @@
 package com.lambdaschool.todos;
 
+import com.github.javafaker.Faker;
+import com.lambdaschool.todos.models.Todos;
 import com.lambdaschool.todos.models.User;
+import com.lambdaschool.todos.repository.UserRepository;
 import com.lambdaschool.todos.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * SeedData puts both known and random data into the database. It implements CommandLineRunner.
@@ -23,6 +30,9 @@ public class SeedData implements CommandLineRunner
     @Autowired
     UserService userService;
 
+    @Autowired
+    private UserRepository userrepos;
+
     /**
      * Generates test, seed data for our application
      * First a set of known data is seeded into our database.
@@ -34,7 +44,7 @@ public class SeedData implements CommandLineRunner
      */
     @Transactional
     @Override
-    public void run(String[] args) throws Exception
+    public void run(String[] args)
     {
         User u1 = new User("admin",
                            "password",
@@ -80,5 +90,24 @@ public class SeedData implements CommandLineRunner
                            "password",
                            "misskitty@school.lambda");
         userService.save(u5);
+
+
+
+//        Faker faker = new Faker();
+//
+//
+//        for (int i = 0; i < 100; i++) {
+//            User c = new User(
+//                faker.gameOfThrones().character(),
+//                faker.gameOfThrones().dragon(),
+//                    "misskitty@school.lambda");
+//            for(int x = 1; x < new Random().nextInt(3) ; x++) {
+//                c.getTodos().add(new Todos(c, faker.gameOfThrones().quote()));
+//            }
+//        userrepos.save(c);
+//    }
+
+
     }
+
 }
